@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Profile | IDOR Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="main-title">
+  🧑‍💻 User Profile  
+  <span>Insecure Direct Object Reference (IDOR)</span>
+</h1>
+
+<div class="card">
+  <h2>👤 Profile Data</h2>
+  <p id="data"></p>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+fetch(`/profile/${id}`)
+  .then(res => res.json())
+  .then(user => {
+    data.innerHTML = `
+      <b>ID:</b> ${user.id}<br>
+      <b>Username:</b> ${user.username}<br>
+      <b>Role:</b> ${user.role}
+    `;
+  });
+</script>
+
+</body>
+</html>

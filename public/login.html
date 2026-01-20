@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authentication Anywhere | Cyber Security Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="main-title">
+  🔐 Authentication Anywhere  
+  <span>IDOR Vulnerability Demo</span>
+</h1>
+
+<div class="card">
+  <h2>🚀 Login Portal</h2>
+  <input id="username" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login() {
+  fetch("/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: username.value,
+      password: password.value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      window.location = `profile.html?id=${data.userId}`;
+    } else {
+      alert("Login Failed");
+    }
+  });
+}
+</script>
+
+</body>
+</html>
